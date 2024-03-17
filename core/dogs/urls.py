@@ -2,7 +2,8 @@ from django.urls import path
 from rest_framework import routers
 from dogs.apps import DogsConfig
 
-from dogs.views import DogViewSet, BreedListView, BreedDetailView, BreedCreateView, BreedUpdateView, BreedDeleteView
+from dogs.views import DogViewSet, BreedListView, BreedDetailView, BreedCreateView, BreedUpdateView, BreedDeleteView, \
+    DonationCreateApiView, SetLikeToDog
 
 app_name = DogsConfig.name
 
@@ -15,6 +16,8 @@ urlpatterns = [
     path('<int:pk>/update/', BreedUpdateView.as_view()),
     path('breed/create/', BreedCreateView.as_view()),
     path(' <int:pk>/delete/', BreedDeleteView.as_view()),
+    path('donation/create/', DonationCreateApiView.as_view()),
+    path('set_like/', SetLikeToDog.as_view()),
 ]
 
 urlpatterns += router.urls

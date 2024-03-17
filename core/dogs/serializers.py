@@ -1,10 +1,13 @@
 from rest_framework import serializers
 
-from dogs.models import Dog, Breed
+from dogs.models import Dog, Breed, Donation
 from rest_framework.fields import SerializerMethodField
+
+from dogs.validators import validators_scam_words
 
 
 class DogSerializer(serializers.ModelSerializer):
+    name = serializers.CharField(validators=[validators_scam_words])
     class Meta:
         model = Dog
         fields = "__all__"
@@ -37,3 +40,9 @@ class DogDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Dog
         fields = ('name', 'breed', 'dog_with_same_breed')
+
+
+class DonationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Donation
+        fields = '__all__'
